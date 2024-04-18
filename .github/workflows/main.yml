@@ -1,0 +1,29 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build & Push Image To ECR
+        id: ecr
+        uses: jwalton/gh-ecr-push@v1
+        with:
+          access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: ${{ secrets.REGION }}
+          image: 654654556549.dkr.ecr.eu-central-1.amazonaws.com/iih:${GITHUB_RUN_NUMBER}
+
+        run: docker build -t 654654556549.dkr.ecr.eu-central-1.amazonaws.com/iih:latest .
+
+      # - name: Push Docker image to ECR
+      #   run: |
+      #     docker push 654654556549.dkr.ecr.eu-central-1.amazonaws.com/iih:latest
