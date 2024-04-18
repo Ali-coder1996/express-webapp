@@ -35,5 +35,5 @@ jobs:
         run: |
           VERSION_NUMBER=$(cat VERSION)
           echo "$VERSION_NUMBER"
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${GITHUB_RUN_NUMBER} .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:${GITHUB_RUN_NUMBER}
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$VERSION_NUMBER.${GITHUB_RUN_NUMBER} .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$VERSION_NUMBER.${GITHUB_RUN_NUMBER}
