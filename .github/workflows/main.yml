@@ -42,11 +42,11 @@ jobs:
         with:
           version: 'latest'
 
-      # - name: Set up kubectl
-      #   uses: azure/setup-kubectl@v4
-      #   with:
-      #     version: 'latest'
-      #     kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: 'latest'
+          kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
 
       - name: Clone Helm chart repository
         env:
@@ -54,7 +54,7 @@ jobs:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         run: |
           git clone $HELM_CHART_REPO_URL
-          cat $KUBE_CONFIG_DATA
+          kubectl get node
 
       # - name: Install Helm chart
       #   run: |
