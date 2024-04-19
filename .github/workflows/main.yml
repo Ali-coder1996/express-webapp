@@ -45,11 +45,12 @@ jobs:
           HELM_CHART_REPO_URL: ${{ secrets.HELM_CHART_REPO_URL }}
         run: |
           git clone $HELM_CHART_REPO_URL
-          echo ${{ github.repository }}
 
       - name: Extract Repository Name
         id: set_output
-        run: echo "repository_name=$(basename $(dirname $GITHUB_REPOSITORY))" >> $GITHUB_OUTPUT
+        run: |
+          repo_full_name=${GITHUB_REPOSITORY##*/}
+          echo "repository_name=${repo_full_name}" >> $GITHUB_OUTPUT
 
       - name: Print Repository Name
         run: |
