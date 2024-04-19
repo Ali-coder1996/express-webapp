@@ -54,7 +54,7 @@ jobs:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         run: |
           git clone $HELM_CHART_REPO_URL
-          kubectl get node
+          kubectl get node --kubeconfig $KUBE_CONFIG_DATA
 
       # - name: Install Helm chart
       #   run: |
