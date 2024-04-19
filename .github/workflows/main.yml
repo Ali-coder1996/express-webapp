@@ -45,4 +45,13 @@ jobs:
           HELM_CHART_REPO_URL: ${{ secrets.HELM_CHART_REPO_URL }}
         run: |
           git clone $HELM_CHART_REPO_URL
-          ls -l
+          echo ${{ github.repository }}
+      
+      # - name: Install Helm chart
+      #   run: |
+      #     helm upgrade --install express-webapp ./helm/ \
+      #       --namespace <your-namespace> \
+      #       --set image.repository=<your-docker-image-repository> \
+      #       --set image.tag=latest \
+      #       --set replicaCount=3 \
+      #       --set service.type=LoadBalancer
