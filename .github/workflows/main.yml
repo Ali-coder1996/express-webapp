@@ -45,14 +45,15 @@ jobs:
           HELM_CHART_REPO_URL: ${{ secrets.HELM_CHART_REPO_URL }}
         run: |
           git clone $HELM_CHART_REPO_URL
+          echo $VERSION_NUMBER
+          echo $ECR_REGISTRY/$ECR_REPOSITORY
 
-      - name: helm deploy
-        uses: koslibpro/helm-eks-action@master
-        env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-        with:
-          command: helm upgrade --install express-webapp  ./helm/${GITHUB_REPOSITORY##*/} -f ./helm/${GITHUB_REPOSITORY##*/}/values.yaml --set image.repository=$ECR_REGISTRY/$ECR_REPOSITORY --namespace t --set image.tag=$VERSION_NUMBER.${GITHUB_RUN_NUMBER}
-          # command: kubectl get node
+      # - name: helm deploy
+      #   uses: koslibpro/helm-eks-action@master
+      #   env:
+      #     KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+      #   with:
+      #     command: helm upgrade --install express-webapp  ./helm/${GITHUB_REPOSITORY##*/} -f ./helm/${GITHUB_REPOSITORY##*/}/values.yaml --set image.repository=$ECR_REGISTRY/$ECR_REPOSITORY --namespace t --set image.tag=$VERSION_NUMBER.${GITHUB_RUN_NUMBER}
 
       # - name: Install Helm chart
       #   run: |
