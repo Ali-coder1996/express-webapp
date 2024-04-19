@@ -39,7 +39,8 @@ jobs:
   Deploy:
     name: Deploy
     runs-on: ubuntu-latest
-
+    
+    steps:
       - name: Set up Helm
         uses: azure/setup-helm@v4
         with:
