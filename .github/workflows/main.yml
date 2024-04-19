@@ -9,6 +9,9 @@ jobs:
   build:
     name: Build & Push
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ 20 ]
 
     steps:
       - name: Checkout code
@@ -50,7 +53,4 @@ jobs:
       #   run: |
       #     helm upgrade --install express-webapp ./helm/${GITHUB_REPOSITORY##*/} \
       #       --namespace <your-namespace> \
-      #       --set image.repository=<your-docker-image-repository> \
-      #       --set image.tag=latest \
-      #       --set replicaCount=3 \
-      #       --set service.type=LoadBalancer
+      #       --set image.tag=$VERSION_NUMBER.${GITHUB_RUN_NUMBER} \
