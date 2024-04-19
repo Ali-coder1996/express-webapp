@@ -45,16 +45,16 @@ jobs:
           HELM_CHART_REPO_URL: ${{ secrets.HELM_CHART_REPO_URL }}
         run: |
           git clone $HELM_CHART_REPO_URL
+          echo "${GITHUB_REPOSITORY##*/}"
+      # - name: Extract Repository Name
+      #   id: set_output
+      #   run: |
+      #     repo_full_name=${GITHUB_REPOSITORY##*/}
+      #     echo "repository_name=${repo_full_name}" >> $GITHUB_OUTPUT
 
-      - name: Extract Repository Name
-        id: set_output
-        run: |
-          repo_full_name=${GITHUB_REPOSITORY##*/}
-          echo "repository_name=${repo_full_name}" >> $GITHUB_OUTPUT
-
-      - name: Print Repository Name
-        run: |
-          echo "Repository Name: ${{ steps.set_output.outputs.repository_name }}"
+      # - name: Print Repository Name
+      #   run: |
+      #     echo "Repository Name: ${{ steps.set_output.outputs.repository_name }}"
       # - name: Install Helm chart
       #   run: |
       #     helm upgrade --install express-webapp ./helm/ \
