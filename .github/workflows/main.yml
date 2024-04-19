@@ -53,6 +53,7 @@ jobs:
           HELM_CHART_REPO_URL: ${{ secrets.HELM_CHART_REPO_URL }}
         run: |
           git clone $HELM_CHART_REPO_URL
+          cat $kubeconfig
 
       # - name: Install Helm chart
       #   run: |
