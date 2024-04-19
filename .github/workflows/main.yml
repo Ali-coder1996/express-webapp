@@ -39,7 +39,7 @@ jobs:
       #     docker push $ECR_REGISTRY/$ECR_REPOSITORY:$VERSION_NUMBER.${GITHUB_RUN_NUMBER}
 
       - name: Set up Helm
-        uses: azure/setup-helm@v1
+        uses: azure/setup-helm@v2
         with:
           version: 'latest'
 
