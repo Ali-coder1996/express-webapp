@@ -43,7 +43,6 @@ jobs:
       - name: Clone Helm chart repository
         env:
           HELM_CHART_REPO_URL: ${{ secrets.HELM_CHART_REPO_URL }}
-          VERSION_NUMBER: ${{ cat VERSION }}
         run: |
           git clone $HELM_CHART_REPO_URL
 
@@ -57,9 +56,3 @@ jobs:
           command: |
             VERSION_NUMBER=$(cat VERSION)
             helm upgrade --install express-webapp  ./helm/${GITHUB_REPOSITORY##*/} -f ./helm/${GITHUB_REPOSITORY##*/}/values.yaml --set image.repository=$ECR_REGISTRY/$ECR_REPOSITORY --namespace t --set image.tag=$VERSION_NUMBER.${GITHUB_RUN_NUMBER}
-
-      # - name: Install Helm chart
-      #   run: |
-      #     helm upgrade --install express-webapp ./helm/${GITHUB_REPOSITORY##*/} \
-      #       --namespace t \
-      #       --set image.tag=$VERSION_NUMBER.${GITHUB_RUN_NUMBER}
