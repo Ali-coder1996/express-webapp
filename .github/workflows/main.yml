@@ -39,4 +39,6 @@ jobs:
         uses: azure/setup-helm@v1
         with:
           version: 'latest'
+          
+      - name: helm version 
         run: helm version
