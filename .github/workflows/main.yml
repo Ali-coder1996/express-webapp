@@ -46,7 +46,14 @@ jobs:
         run: |
           git clone $HELM_CHART_REPO_URL
           echo ${{ github.repository }}
-      
+
+      - name: Extract Repository Name
+        id: extract_repo_name
+        run: echo "::set-output name=repo_name::$(echo ${{ github.repository }} | cut -d '/' -f 2)"
+
+      - name: Print Repository Name
+        run: |
+          echo "Repository Name: ${{ steps.extract_repo_name.outputs.repo_name }}"
       # - name: Install Helm chart
       #   run: |
       #     helm upgrade --install express-webapp ./helm/ \
