@@ -25,7 +25,7 @@ jobs:
 
       - name: Login to Amazon ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v4
+        uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build, tag, and push the image to Amazon ECR
         id: build-image
@@ -46,7 +46,7 @@ jobs:
         run: |
           git clone $HELM_CHART_REPO_URL
 
-      - name: helm deploy
+      - name: Helm deploy
         uses: koslibpro/helm-eks-action@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
