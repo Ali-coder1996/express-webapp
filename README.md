@@ -21,7 +21,7 @@ To run the web application locally, follow these steps:
 
 ## Triggering the CI/CD Pipeline
 
-The CI/CD pipeline is set up to trigger automatically whenever there's a change in the source code repository. However, you can also trigger it manually by following these steps:
+The CI/CD pipeline is set up to trigger automatically whenever there's a change in the source code repository in **main** branch. However, you can also trigger it manually by following these steps:
 
 1. Make changes to the source code or configuration files.
 2. Commit and push your changes to the repository.
