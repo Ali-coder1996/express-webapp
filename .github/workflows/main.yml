@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build & Push
+    name: Build & Push & Deploy To k9s
     runs-on: ubuntu-latest
 
     steps:
