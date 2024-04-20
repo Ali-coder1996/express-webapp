@@ -35,7 +35,7 @@ jobs:
           ECR_REPOSITORY: iih
         run: |
           VERSION_NUMBER=$(cat VERSION)
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$VERSION_NUMBER.${GITHUB_RUN_NUMBER} .
+          docker buildx build -t $ECR_REGISTRY/$ECR_REPOSITORY:$VERSION_NUMBER.${GITHUB_RUN_NUMBER} .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$VERSION_NUMBER.${GITHUB_RUN_NUMBER}
 
       # - name: Set up Helm
