@@ -1,7 +1,7 @@
 pipeline {
   agent {
     kubernetes {
-      inheritFrom 'jenkins-terraform'
+      inheritFrom 'python'
     }
   }
   stages {
