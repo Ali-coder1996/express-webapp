@@ -8,8 +8,7 @@ pipeline {
     stage('Test') {
       steps {
           sh '''
-          terrafrom
-          docker -v
+          terrafrom --version
           '''
       }
     }
