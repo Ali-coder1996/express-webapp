@@ -1,13 +1,11 @@
 pipeline {
   agent {
-    kubernetes {
-        inheritFrom 'ali'
-      }
+    label 'ali'
   }
   stages {
     stage('Environment') {
       steps {
-          sh "hostname"
+          sh "terraform --version"
       }
     }
   } 
