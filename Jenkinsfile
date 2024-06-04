@@ -7,7 +7,7 @@ pipeline {
   stages {
     stage('Environment') {
       steps {
-          sh "terraform --version"
+          sh "hostname"
       }
     }
   } 
