@@ -29,3 +29,5 @@ The CI/CD pipeline is set up to trigger automatically whenever there's a change 
 
 The pipeline will build the Docker image, push it to the container registry, and deploy the updated image to the Kubernetes cluster provisioned by Terraform.
 
+
+
