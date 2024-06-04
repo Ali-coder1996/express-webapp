@@ -1,6 +1,6 @@
 pipeline {
   agent {
-    label 'python'
+    label 'ali'
       }
   stages {
     stage('Environment') {
