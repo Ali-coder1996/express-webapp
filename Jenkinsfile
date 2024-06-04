@@ -1,13 +1,26 @@
 pipeline {
-  agent {
-    kubernetes {
-      inheritFrom 'docker'
-    }
-  }
+  agent none
+  
   stages {
-    stage('Environment') {
+    stage('docker') {
+      agent {
+        kubernetes {
+          inheritFrom 'docker'
+        }
+      }
       steps {
           sh "docker -v"
+      }
+    }
+
+    stage('terrafrom') {
+      agent {
+        kubernetes {
+          inheritFrom 'terraform'
+        }
+      }
+      steps {
+          sh "terraform --version"
       }
     }
   } 
