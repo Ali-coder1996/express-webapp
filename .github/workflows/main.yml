@@ -1,60 +1,60 @@
-name: CI/CD Pipeline
+# name: CI/CD Pipeline
 
-on:
-  push:
-    branches:
-      - master
+# on:
+#   push:
+#     branches:
+#       - master
 
-jobs:
-  build:
-    name: Build & Push & Deploy To k9s
-    runs-on: ubuntu-latest
+# jobs:
+#   build:
+#     name: Build & Push & Deploy To k9s
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      - name: App Version
-        id: step_one
-        run: |
-          echo "VERSION_NUMBER=$(cat VERSION)" >> "$GITHUB_ENV"
+#       - name: App Version
+#         id: step_one
+#         run: |
+#           echo "VERSION_NUMBER=$(cat VERSION)" >> "$GITHUB_ENV"
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-central-1
+#       - name: Configure AWS credentials
+#         uses: aws-actions/configure-aws-credentials@v4
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: eu-central-1
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
+#       - name: Login to Amazon ECR
+#         id: login-ecr
+#         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build, tag, and push the image to Amazon ECR
-        id: build-image
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: iih
-        run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$VERSION_NUMBER.${GITHUB_RUN_NUMBER} .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$VERSION_NUMBER.${GITHUB_RUN_NUMBER}
+#       - name: Build, tag, and push the image to Amazon ECR
+#         id: build-image
+#         env:
+#           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+#           ECR_REPOSITORY: iih
+#         run: |
+#           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$VERSION_NUMBER.${GITHUB_RUN_NUMBER} .
+#           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$VERSION_NUMBER.${GITHUB_RUN_NUMBER}
 
-      - name: Set up Helm
-        uses: azure/setup-helm@v4
+#       - name: Set up Helm
+#         uses: azure/setup-helm@v4
 
-      - name: Clone Helm chart repository
-        env:
-          HELM_CHART_REPO_URL: ${{ secrets.HELM_CHART_REPO_URL }}
-        run: |
-          git clone $HELM_CHART_REPO_URL
+#       - name: Clone Helm chart repository
+#         env:
+#           HELM_CHART_REPO_URL: ${{ secrets.HELM_CHART_REPO_URL }}
+#         run: |
+#           git clone $HELM_CHART_REPO_URL
 
-      - name: Helm deploy
-        uses: koslibpro/helm-eks-action@master
-        env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: iih
-          NAMESPACE: iih
-        with:
-          command: |
-            helm upgrade --install express-webapp  ./helm/${GITHUB_REPOSITORY##*/} -f ./helm/${GITHUB_REPOSITORY##*/}/values.yaml --set image.repository=$ECR_REGISTRY/$ECR_REPOSITORY --namespace $NAMESPACE --set image.tag=$VERSION_NUMBER.${GITHUB_RUN_NUMBER}
+#       - name: Helm deploy
+#         uses: koslibpro/helm-eks-action@master
+#         env:
+#           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+#           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+#           ECR_REPOSITORY: iih
+#           NAMESPACE: iih
+#         with:
+#           command: |
+#             helm upgrade --install express-webapp  ./helm/${GITHUB_REPOSITORY##*/} -f ./helm/${GITHUB_REPOSITORY##*/}/values.yaml --set image.repository=$ECR_REGISTRY/$ECR_REPOSITORY --namespace $NAMESPACE --set image.tag=$VERSION_NUMBER.${GITHUB_RUN_NUMBER}
