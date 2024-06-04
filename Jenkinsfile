@@ -1,7 +1,7 @@
 pipeline {
-  agent {
-    label 'terraform'
-  }
+  kubernetes {
+		inheritFrom 'jenkins-terraform'
+	}
   stages {
     stage('Environment') {
       steps {
