@@ -1,6 +1,6 @@
 pipeline {
   agent {
-    label 'ali'
+    label 'terraform'
   }
   stages {
     stage('Environment') {
