@@ -1,7 +1,6 @@
 pipeline {
   agent {
-    kubernetes {
-        inheritFrom 'asdasdqwdqdv213'
+    label 'python'
       }
   }
   stages {
@@ -10,5 +9,4 @@ pipeline {
           sh "hostname"
       }
     }
-  } 
-}
+} 
