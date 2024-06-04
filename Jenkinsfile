@@ -5,7 +5,7 @@ pipeline {
   stages {
     stage('Environment') {
       steps {
-          echo "PATH = ${PATH}"
+          sh "terraform --version"
       }
     }
   } 
