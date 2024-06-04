@@ -5,9 +5,9 @@ pipeline {
       }
   }
   stages {
-    stage('Test') {
+    stage('Environment') {
       steps {
-          sh 'echo hello'
+          echo "PATH = ${PATH}"
       }
     }
   } 
