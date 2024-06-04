@@ -1,7 +1,7 @@
 pipeline {
   agent {
       kubernetes {
-          inheritFrom 'jenkins/jenkins-jenkins-agent'
+          inheritFrom 'default'
       }
   }
   stages {
