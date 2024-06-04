@@ -1,7 +1,7 @@
 pipeline {
   agent {
     kubernetes {
-          inheritFrom 'python'
+        inheritFrom 'asdasdqwdqdv213'
       }
   }
   stages {
