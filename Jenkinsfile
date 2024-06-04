@@ -1,6 +1,6 @@
 pipeline {
   agent {
-    label 'ali'
+    label 'jenkins/jenkins-jenkins-agent'
   }
   stages {
     stage('Environment') {
