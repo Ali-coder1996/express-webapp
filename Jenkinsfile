@@ -1,6 +1,8 @@
 pipeline {
   agent {
-    label 'jenkins/jenkins-jenkins-agent'
+    kubernetes {
+          inheritFrom 'jenkins/jenkins-jenkins-agent'
+      }
   }
   stages {
     stage('Environment') {
