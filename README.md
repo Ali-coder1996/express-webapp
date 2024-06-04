@@ -28,3 +28,4 @@ The CI/CD pipeline is set up to trigger automatically whenever there's a change 
 3. Visit the "Actions" tab in your GitHub repository to monitor the progress of the pipeline.
 
 The pipeline will build the Docker image, push it to the container registry, and deploy the updated image to the Kubernetes cluster provisioned by Terraform.
+
