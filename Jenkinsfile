@@ -1,7 +1,7 @@
 pipeline {
   agent {
       kubernetes {
-          inheritFrom 'default'
+          inheritFrom 'maven'
       }
   }
   stages {
@@ -12,4 +12,3 @@ pipeline {
     }
   } 
 }
-
