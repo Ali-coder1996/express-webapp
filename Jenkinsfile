@@ -8,7 +8,7 @@ pipeline {
     stage('Test') {
       steps {
           sh '''
-          terrafrom --version
+          echo Hello
           '''
       }
     }
