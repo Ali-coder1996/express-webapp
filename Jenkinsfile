@@ -7,7 +7,10 @@ pipeline {
   stages {
     stage('Test') {
       steps {
-          echo "PATH = ${PATH}"
+          sh '''
+          terrafrom
+          docker -v
+          '''
       }
     }
   } 
