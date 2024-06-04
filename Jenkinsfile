@@ -1,12 +1,14 @@
 pipeline {
   agent {
-    label 'ali'
+    kubernetes {
+        inheritFrom 'ali'
       }
+  }
   stages {
     stage('Environment') {
       steps {
           sh "hostname"
       }
     }
-} 
+  } 
 }
