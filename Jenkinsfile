@@ -1,13 +1,13 @@
 pipeline {
   agent {
     kubernetes {
-      inheritFrom 'python'
+      inheritFrom 'docker'
     }
   }
   stages {
     stage('Environment') {
       steps {
-          sh "terraform --version"
+          sh "docker -v"
       }
     }
   } 
