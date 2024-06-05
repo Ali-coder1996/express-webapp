@@ -4,23 +4,14 @@ pipeline {
         KUBECONFIG = ''
     }
   stages {
-    stage('k9s') {
-      agent {
-        kubernetes {
-          inheritFrom 'docker'
+    stages {
+    stage('Deploy App') {
+      steps {
+        script {
+          kubernetesDeploy(configs: "hellodocker.yml", kubeconfigId: "KUBE")
         }
       }
-      steps {
-            withCredentials([file(credentialsId: 'KUBE', variable: 'KUBECONFIG')]) {
-                script {
-                    // Now the KUBECONFIG environment variable points to the temporary file location
-                    echo "Using kubeconfig file at: ${env.KUBECONFIG}"
-
-                    // You can now use kubectl commands
-                    sh 'kubectl get ns'
-                }
-            }
-        }
     }
+  }
   } 
 }
