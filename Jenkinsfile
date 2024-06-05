@@ -1,27 +1,26 @@
 pipeline {
   agent none
-  
+  environment {
+        KUBECONFIG = ''
+    }
   stages {
-    stage('docker') {
+    stage('k9s') {
       agent {
         kubernetes {
           inheritFrom 'docker'
         }
       }
       steps {
-          sh "docker -v"
-      }
-    }
+            withCredentials([file(credentialsId: 'KUBE', variable: 'KUBECONFIG')]) {
+                script {
+                    // Now the KUBECONFIG environment variable points to the temporary file location
+                    echo "Using kubeconfig file at: ${env.KUBECONFIG}"
 
-    stage('terrafrom') {
-      agent {
-        kubernetes {
-          inheritFrom 'terraform'
+                    // You can now use kubectl commands
+                    sh 'kubectl get ns'
+                }
+            }
         }
-      }
-      steps {
-          sh "terraform --version"
-      }
     }
   } 
 }
