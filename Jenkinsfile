@@ -26,11 +26,11 @@ pipeline {
     stage('terrafrom') {
       agent {
         kubernetes {
-          inheritFrom 'kubectl'
+          inheritFrom 'helm'
         }
       }
       steps {
-          sh "kubectl version"
+          sh "helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx"
       }
     }
   } 
