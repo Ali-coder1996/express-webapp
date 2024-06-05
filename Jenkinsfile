@@ -17,7 +17,7 @@ pipeline {
                     echo "Using kubeconfig file at: ${env.KUBECONFIG}"
 
                     // You can now use kubectl commands
-                    sh 'kubectl get ns'
+                    // sh 'kubectl get ns'
                 }
             }
           }
