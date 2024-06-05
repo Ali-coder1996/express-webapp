@@ -26,7 +26,7 @@ pipeline {
     stage('terraform') {
       agent {
         kubernetes {
-          inheritFrom 'helm'
+          inheritFrom 'vm'
         }
       }
       steps {
