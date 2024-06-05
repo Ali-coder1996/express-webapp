@@ -4,7 +4,6 @@ pipeline {
         KUBECONFIG = ''
     }
   stages {
-    stages {
     stage('Deploy App') {
       steps {
         script {
@@ -13,5 +12,4 @@ pipeline {
       }
     }
   }
-  } 
-}
+} 
