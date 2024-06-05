@@ -4,35 +4,35 @@ pipeline {
         KUBECONFIG = ''
     }
   stages {
-    stage('k9s') {
-      agent {
-        kubernetes {
-          inheritFrom 'agent'
-        }
-      }
-      steps {
-            withCredentials([file(credentialsId: 'KUBE', variable: 'KUBECONFIG')]) {
-                script {
-                    // Now the KUBECONFIG environment variable points to the temporary file location
-                    echo "Using kubeconfig file at: ${env.KUBECONFIG}"
-
-                    // You can now use kubectl commands
-                    sh 'kubectl get ns'
-                }
-            }
-            sh "echo hi"
-          }
-    }
-
-    // stage('terrafrom') {
+    // stage('k9s') {
     //   agent {
     //     kubernetes {
-    //       inheritFrom 'helm'
+    //       inheritFrom 'vm'
     //     }
     //   }
     //   steps {
-    //       sh "helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx"
-    //   }
+    //         withCredentials([file(credentialsId: 'KUBE', variable: 'KUBECONFIG')]) {
+    //             script {
+    //                 // Now the KUBECONFIG environment variable points to the temporary file location
+    //                 echo "Using kubeconfig file at: ${env.KUBECONFIG}"
+
+    //                 // You can now use kubectl commands
+    //                 sh 'kubectl get ns'
+    //             }
+    //         }
+    //         sh "echo hi"
+    //       }
     // }
+
+    stage('terrafrom') {
+      agent {
+        kubernetes {
+          inheritFrom 'helm'
+        }
+      }
+      steps {
+          sh "helm version"
+      }
+    }
   } 
 }
