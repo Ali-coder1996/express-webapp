@@ -23,7 +23,6 @@ pipeline {
     //         sh "echo hi"
     //       }
     // }
-
     stage('terraform') {
       agent {
         kubernetes {
