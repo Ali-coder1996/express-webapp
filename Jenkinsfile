@@ -26,11 +26,11 @@ pipeline {
     stage('terraform') {
       agent {
         kubernetes {
-          inheritFrom 'vm'
+          inheritFrom 'jenkins-python'
         }
       }
       steps {
-          sh "helm version"
+          sh "python3 --version"
       }
     }
   } 
