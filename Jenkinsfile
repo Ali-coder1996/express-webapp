@@ -20,18 +20,19 @@ pipeline {
                     sh 'kubectl get ns'
                 }
             }
+            sh "echo hi"
           }
     }
 
-    stage('terrafrom') {
-      agent {
-        kubernetes {
-          inheritFrom 'helm'
-        }
-      }
-      steps {
-          sh "helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx"
-      }
-    }
+    // stage('terrafrom') {
+    //   agent {
+    //     kubernetes {
+    //       inheritFrom 'helm'
+    //     }
+    //   }
+    //   steps {
+    //       sh "helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx"
+    //   }
+    // }
   } 
 }
