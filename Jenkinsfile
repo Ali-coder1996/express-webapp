@@ -24,14 +24,14 @@ pipeline {
     //       }
     // }
 
-    stage('terrafrom') {
+    stage('terraform') {
       agent {
         kubernetes {
-          inheritFrom 'helm'
+          inheritFrom 'terraform'
         }
       }
       steps {
-          sh "helm version"
+          sh "terraform --version"
       }
     }
   } 
