@@ -9,6 +9,9 @@ pipeline {
         }
       }
       steps {
+          sh "whoami && pwd"
+          sh "docker version"
+          sh "systemctl start docker"
           sh "docker run helloworld"
       }
     }
