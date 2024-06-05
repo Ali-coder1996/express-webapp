@@ -27,11 +27,11 @@ pipeline {
     stage('terraform') {
       agent {
         kubernetes {
-          inheritFrom 'terraform'
+          inheritFrom 'helm'
         }
       }
       steps {
-          sh "terraform --version"
+          sh "helm version"
       }
     }
   } 
