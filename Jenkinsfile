@@ -54,16 +54,16 @@ pipeline {
         stage('Build') {
             steps {
                 container('busybox') {
-                    sh 'echo "Running build inside busybox container"'
+                    sh 'helm version'
                 }
             }
         }
-        stage('Test') {
-            steps {
-                container('jnlp') {
-                    sh 'echo "Running tests inside jnlp container"'
-                }
-            }
-        }
+        // stage('Test') {
+        //     steps {
+        //         container('jnlp') {
+        //             sh 'echo "Running tests inside jnlp container"'
+        //         }
+        //     }
+        // }
     }
 }
