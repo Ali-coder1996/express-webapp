@@ -32,22 +32,22 @@ pipeline {
     }
 
     stages {
-      stage('Build/Push Image') {
-       steps{
-        container('docker') {
-        script {
-         def version = readFile('VERSION')
-         patch = version.trim()
-         patch = patch + ".$BUILD_NUMBER"
+      // stage('Build/Push Image') {
+      //  steps{
+      //   container('docker') {
+      //   script {
+      //    def version = readFile('VERSION')
+      //    patch = version.trim()
+      //    patch = patch + ".$BUILD_NUMBER"
          
-         dockerImage = docker.build registry_dev + ":$patch" , "."
-         docker.withRegistry( 'https://index.docker.io/v1/', 'reg-logins' ) { 
-                      dockerImage.push(patch)
-                 }
-         }
-        }
-      }
-       }
+      //    dockerImage = docker.build registry_dev + ":$patch" , "."
+      //    docker.withRegistry( 'https://index.docker.io/v1/', 'reg-logins' ) { 
+      //                 dockerImage.push(patch)
+      //            }
+      //    }
+      //   }
+      // }
+      //  }
 
     stage('Hello world') {
       agent {
@@ -57,7 +57,7 @@ pipeline {
       }
       steps {
         container('helm') {
-          sh "kubectl get ns"
+          sh "kubectl get po -n jenkins"
       }
     }
     }
