@@ -44,10 +44,30 @@
 
 pipeline {
     agent {
-        kubernetes {
-          inheritFrom 'jenkins-slave'
-        }
-      }
+    kubernetes {
+      cloud 'kubernetes'
+      label 'jenkins-slave'
+      defaultContainer 'jnlp'
+      yaml '''
+        apiVersion: v1
+        kind: Pod
+        spec:
+          containers:
+          - name: docker
+            image: docker:24.0.7
+            command:
+            - cat
+            tty: true
+            volumeMounts:
+             - mountPath: /var/run/docker.sock
+               name: docker-sock
+          volumes:
+          - name: docker-sock
+            hostPath:
+              path: /var/run/docker.sock    
+        '''
+    }
+    }
     stages {
         stage('Build') {
             steps {
