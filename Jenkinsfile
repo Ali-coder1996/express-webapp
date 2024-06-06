@@ -49,17 +49,17 @@ pipeline {
       }
        }
 
-    // stage('Hello world') {
-    //   agent {
-    //     kubernetes {
-    //       inheritFrom 'jenkins-slave'
-    //     }
-    //   }
-    //   steps {
-    //     container('helm') {
-    //       sh "kubectl get ns"
-    //   }
-    // }
-    // }
+    stage('Hello world') {
+      agent {
+        kubernetes {
+          inheritFrom 'jenkins-slave'
+        }
+      }
+      steps {
+        container('helm') {
+          sh "kubectl get ns"
+      }
+    }
+    }
  }
 }
