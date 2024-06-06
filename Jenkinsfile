@@ -45,16 +45,9 @@
 pipeline {
     agent {
         kubernetes {
-            cloud 'kubernetes'
-            label 'jenkins-slave'
-            defaultContainer 'helm'
+          inheritFrom 'jenkins-slave'
         }
-    }
-    // agent {
-    //     kubernetes {
-    //       inheritFrom 'jenkins-slave'
-    //     }
-    //   }
+      }
     stages {
         stage('Build') {
             steps {
@@ -64,12 +57,12 @@ pipeline {
                 }
             }
         }
-        // stage('Test') {
-        //     steps {
-        //         container('jnlp') {
-        //             sh 'echo "Running tests inside jnlp container"'
-        //         }
-        //     }
-        // }
+        stage('docker') {
+            steps {
+                container('docker') {
+                    sh 'docker images'
+                }
+            }
+        }
     }
 }
