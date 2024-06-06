@@ -54,7 +54,7 @@ pipeline {
     //     }
     //   }
     //   steps {
-    //       sh "helm version"
+    //       sh "echo $env.JOB_NAME"
     //       sh "kubectl bersion"
     //   }
     // }
