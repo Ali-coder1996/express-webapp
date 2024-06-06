@@ -47,7 +47,7 @@ pipeline {
         kubernetes {
             cloud 'kubernetes'
             label 'jenkins-slave'
-            defaultContainer 'jnlp'
+            defaultContainer 'helm'
         }
     }
     // agent {
