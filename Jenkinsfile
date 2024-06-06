@@ -12,7 +12,7 @@ pipeline {
               spec:
                 containers:
                 - name: jnlp
-                  image: docker
+                  image: docker:24.0.7
                   command: ["cat"]
                   tty: true
                   volumeMounts:
