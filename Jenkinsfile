@@ -27,12 +27,22 @@ pipeline {
     }
 
   stages {
-    stage ('docker') {
+    // stage ('docker') {
+    //         steps {
+    //             container('ali') {
+    //                 script {
+    //                     sh "docker build . -t test "
+    //                     sh "docker images"
+    //                 }
+    //             }
+    //         }
+    //     }
+      stage ('docker') {
             steps {
                 container('ali') {
                     script {
-                        sh "docker build . -t test "
-                        sh "docker images"
+                        sh "helm version"
+                        sh "kubectl images"
                     }
                 }
             }
@@ -40,12 +50,12 @@ pipeline {
     // stage('Hello world') {
     //   agent {
     //     kubernetes {
-    //       inheritFrom 'docker'
+    //       inheritFrom 'ali'
     //     }
     //   }
     //   steps {
-    //       sh "docker version"
-    //       sh "slepp 1000"
+    //       sh "helm version"
+    //       sh "kubectl bersion"
     //   }
     // }
   } 
