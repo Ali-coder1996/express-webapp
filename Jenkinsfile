@@ -56,7 +56,7 @@ pipeline {
                 container('busybox') {
                     sh 'helm version'
                     sh 'kubectl version'
-                    sh 'terrform --version'
+                    sh 'terraform --version'
                 }
             }
         }
