@@ -69,10 +69,9 @@ pipeline {
       }
     }
 
-    // environment {
-    //   SERVICE_NAME = "$env.SERVICE_NAME"
-    //   registry_dev = "alialhjouj/" + "$map_to_apply.SERVICE_NAME" + "-dev"
-    // }
+    environment {
+      registryCredential = 'reg-logins'
+    }
     stages {
 
         // stage('Build') {
@@ -106,10 +105,10 @@ pipeline {
          patch = patch + ".$BUILD_NUMBER"
          
          dockerImage = docker.build "$env.JOB_NAME"+ ":$patch" , "."
-        //  docker.withRegistry( 'https://dxb.ocir.io', 'reg-logins' ) { 
-        //               dockerImage.push(patch)
-        //          }
-        //  }
+         docker.withRegistry( 'https://hub.docker.com', 'reg-logins' ) { 
+                      dockerImage.push(patch)
+                 }
+         }
         }
       }
        }
