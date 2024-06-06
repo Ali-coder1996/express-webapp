@@ -56,8 +56,9 @@ pipeline {
         }
       }
       steps {
+        container('helm') {
           sh "kubectl get ns"
       }
     }
-      }
+    }
 }
