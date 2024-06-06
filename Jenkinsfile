@@ -58,10 +58,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                container('busybox') {
+                container('helm') {
                     sh 'helm version'
                     sh 'kubectl version'
-                    sh 'terraform --version'
                 }
             }
         }
