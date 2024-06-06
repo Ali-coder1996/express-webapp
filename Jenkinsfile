@@ -1,9 +1,5 @@
 pipeline {
-  agent {
-    kubernetes {
-          inheritFrom 'dockers'
-        }
-  }
+  agent none
 
   stages {
     // stage ('docker') {
@@ -16,16 +12,16 @@ pipeline {
     //             }
     //         }
     //     }
-      stage ('docker') {
-            steps {
-                container('dockers') {
-                    script {
-                        sh "helm version"
-                        sh "kubectl version"
-                    }
-                }
-            }
-        }
+      // stage ('docker') {
+      //       steps {
+      //           container('dockers') {
+      //               script {
+      //                   sh "helm version"
+      //                   sh "kubectl version"
+      //               }
+      //           }
+      //       }
+      //   }
     stage('Hello world') {
       agent {
         kubernetes {
