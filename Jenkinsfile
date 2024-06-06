@@ -27,7 +27,6 @@ pipeline {
     }
 
   stages {
-
     stage ('docker') {
             steps {
                 container('jnlp') {
