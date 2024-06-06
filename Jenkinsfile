@@ -43,13 +43,18 @@
 
 
 pipeline {
+    // agent {
+    //     kubernetes {
+    //         cloud 'kubernetes'
+    //         label 'jenkins-slave'
+    //         defaultContainer 'jnlp'
+    //     }
+    // }
     agent {
         kubernetes {
-            cloud 'kubernetes'
-            label 'jenkins-slave'
-            defaultContainer 'jnlp'
+          inheritFrom 'jenkins-slave'
         }
-    }
+      }
     stages {
         stage('Build') {
             steps {
