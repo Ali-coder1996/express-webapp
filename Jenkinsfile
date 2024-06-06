@@ -82,19 +82,19 @@ pipeline {
     //     }
     //   }
     // }
-        // stage('Build') {
-        //     agent {
-        //         kubernetes {
-        //           inheritFrom 'jenkins-slave'
-        //         }
-        //       }
-        //     steps {
-        //         container('helm') {
-        //             sh 'helm version'
-        //             sh 'kubectl version'
-        //         }
-        //     }
-        // }
+        stage('Build') {
+            agent {
+                kubernetes {
+                  inheritFrom 'jenkins-slave'
+                }
+              }
+            steps {
+                container('helm') {
+                    sh 'helm version'
+                    sh 'kubectl version'
+                }
+            }
+        }
         stage('docker') {
             steps {
                 container('docker') {
