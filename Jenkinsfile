@@ -48,5 +48,16 @@ pipeline {
         }
       }
        }
+
+    stage('Hello world') {
+      agent {
+        kubernetes {
+          inheritFrom 'jenkins-slave'
+        }
+      }
+      steps {
+          sh "kubectl get ns"
+      }
+    }
       }
 }
