@@ -69,10 +69,10 @@ pipeline {
       }
     }
 
-    environment {
-      SERVICE_NAME = "$env.SERVICE_NAME"
-      registry_dev = "alialhjouj/" + "$map_to_apply.SERVICE_NAME" + "-dev"
-    }
+    // environment {
+    //   SERVICE_NAME = "$env.SERVICE_NAME"
+    //   registry_dev = "alialhjouj/" + "$map_to_apply.SERVICE_NAME" + "-dev"
+    // }
     stages {
       stage('Hello world') {
         steps {
