@@ -11,8 +11,8 @@ pipeline {
                   job: build-service
               spec:
                 containers:
-                - name: docker
-                  image: docker:18.09.3
+                - name: jnlp
+                  image: docker
                   command: ["cat"]
                   tty: true
                   volumeMounts:
@@ -30,9 +30,10 @@ pipeline {
 
     stage ('docker') {
             steps {
-                container('docker') {
+                container('jnlp') {
                     script {
                         sh "docker build . -t test "
+                        sh "docker images"
                     }
                 }
             }
