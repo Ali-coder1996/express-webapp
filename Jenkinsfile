@@ -26,7 +26,7 @@ pipeline {
     }
 
     environment {
-      registryCredential = 'reg-login'
+      registryCredential = 're-login'
       registry_dev = "alialhjouj/" + "$env.JOB_NAME"
 
     }
@@ -41,7 +41,7 @@ pipeline {
          patch = patch + ".$BUILD_NUMBER"
          
          dockerImage = docker.build registry_dev + ":$patch" , "."
-         docker.withRegistry( 'https://index.docker.io/v1/', 'reg-login' ) { 
+         docker.withRegistry( 'https://index.docker.io/v1/', 're-login' ) { 
                       dockerImage.push(patch)
                  }
          }
