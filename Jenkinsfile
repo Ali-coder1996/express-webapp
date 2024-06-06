@@ -12,7 +12,7 @@ pipeline {
               spec:
                 containers:
                 - name: ali
-                  image: docker:24.0.7
+                  image: alialhjouj/jenkins:v3
                   command: ["cat"]
                   tty: true
                   volumeMounts:
