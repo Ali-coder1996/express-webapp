@@ -74,14 +74,21 @@ pipeline {
     //   registry_dev = "alialhjouj/" + "$map_to_apply.SERVICE_NAME" + "-dev"
     // }
     stages {
-      stage('Hello world') {
-        steps {
-          container('docker') {
-            sh "echo $env.JOB_NAME"
+    //   stage('Hello world') {
+    //     steps {
+    //       container('docker') {
+    //         sh "echo $env.JOB_NAME"
+    //     }
+    //     }
+    //   }
+    // }
+    stage('docker') {
+            steps {
+                container('docker') {
+                    sh 'docker images'
+                }
+            }
         }
-        }
-      }
-    }
       // stage('Build/Push Image') {
       //  steps{
       //   container('docker') {
