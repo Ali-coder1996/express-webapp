@@ -32,22 +32,22 @@ pipeline {
     }
 
     stages {
-      stage('Build/Push Image') {
-       steps{
-        container('docker') {
-        script {
-         def version = readFile('VERSION')
-         patch = version.trim()
-         patch = patch + ".$BUILD_NUMBER"
+      // stage('Build/Push Image') {
+      //  steps{
+      //   container('docker') {
+      //   script {
+      //    def version = readFile('VERSION')
+      //    patch = version.trim()
+      //    patch = patch + ".$BUILD_NUMBER"
          
-         dockerImage = docker.build registry_dev + ":$patch" , "."
-         docker.withRegistry( 'https://index.docker.io/v1/', 'reg-logins' ) { 
-                      dockerImage.push(patch)
-                 }
-         }
-        }
-      }
-       }
+      //    dockerImage = docker.build registry_dev + ":$patch" , "."
+      //    docker.withRegistry( 'https://index.docker.io/v1/', 'reg-logins' ) { 
+      //                 dockerImage.push(patch)
+      //            }
+      //    }
+      //   }
+      // }
+      //  }
 
     stage('Deploy Chart') {
       agent {
@@ -57,7 +57,7 @@ pipeline {
       }
       steps {
         container('helm') {
-          sh "helm upgrade -i $env.JOB_NAME  helm-express-webapp -n jenkins --set image.tag=$patch --set image.repository=$registry_dev -f helm-express-webapp/values.yaml --atomic --debug --timeout=3m"
+          sh "helm upgrade -i $env.JOB_NAME  helm-express-webapp -n jenkins --set image.tag=37 --set image.repository=$registry_dev -f helm-express-webapp/values.yaml --atomic --debug --timeout=3m"
       }
     }
     }
