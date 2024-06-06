@@ -74,14 +74,7 @@ pipeline {
     //   registry_dev = "alialhjouj/" + "$map_to_apply.SERVICE_NAME" + "-dev"
     // }
     stages {
-      stage('Hello world') {
-        steps {
-          container('docker') {
-            sh "echo $env.JOB_NAME"
-        }
-        }
-      }
-    }
+
         // stage('Build') {
         //     agent {
         //         kubernetes {
@@ -104,21 +97,22 @@ pipeline {
     //     }
     // }
 
-      // stage('Build/Push Image') {
-      //  steps{
-      //   container('docker') {
-      //   script {
-      //    def version = readFile('VERSION')
-      //    patch = version.trim()
-      //    patch = patch + ".$BUILD_NUMBER"
+      stage('Build/Push Image') {
+       steps{
+        container('docker') {
+        script {
+         def version = readFile('VERSION')
+         patch = version.trim()
+         patch = patch + ".$BUILD_NUMBER"
          
-      //    dockerImage = docker.build registry_dev + ":$patch" , "."
-      //   //  docker.withRegistry( 'https://dxb.ocir.io', 'reg-logins' ) { 
-      //   //               dockerImage.push(patch)
-      //   //          }
-      //   //  }
-      //   }
-      // }
+         dockerImage = docker.build "$env.JOB_NAME"+ ":$patch" , "."
+        //  docker.withRegistry( 'https://dxb.ocir.io', 'reg-logins' ) { 
+        //               dockerImage.push(patch)
+        //          }
+        //  }
+        }
+      }
+       }
         // stage('Build') {
         //     agent {
         //         kubernetes {
