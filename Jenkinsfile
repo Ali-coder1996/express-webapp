@@ -1,47 +1,3 @@
-// pipeline {
-//   agent {
-//     kubernetes {
-//           inheritFrom 'dockers'
-//         }
-//   }
-
-//   stages {
-//     // stage ('docker') {
-//     //         steps {
-//     //             container('ali') {
-//     //                 script {
-//     //                     sh "docker build . -t test "
-//     //                     sh "docker images"
-//     //                 }
-//     //             }
-//     //         }
-//     //     }
-//       stage ('docker') {
-//             steps {
-//                 container('jnlp') {
-//                     script {
-//                         sh "terraform --version"
-//                         // sh "helm version"
-//                         // sh "kubectl version"
-//                     }
-//                 }
-//             }
-//         }
-//     stage('Hello world') {
-//       agent {
-//         kubernetes {
-//           inheritFrom 'terraform'
-//         }
-//       }
-//       steps {
-//           sh "terraform --version"
-//           // sh "kubectl version"
-//       }
-//     }
-//   } 
-// }
-
-
 pipeline {
     agent {
       kubernetes {
@@ -74,30 +30,8 @@ pipeline {
       registry_dev = "alialhjouj/" + "$env.JOB_NAME"
 
     }
+
     stages {
-
-        // stage('Build') {
-        //     agent {
-        //         kubernetes {
-        //           inheritFrom 'jenkins-slave'
-        //         }
-        //       }
-        //     steps {
-        //         container('helm') {
-        //             sh 'helm version'
-        //             sh 'kubectl version'
-        //         }
-        //     }
-        // }
-    //     stage('docker') {
-    //         steps {
-    //             container('docker') {
-    //                 sh 'docker images'
-    //             }
-    //         }
-    //     }
-    // }
-
       stage('Build/Push Image') {
        steps{
         container('docker') {
@@ -107,7 +41,7 @@ pipeline {
          patch = patch + ".$BUILD_NUMBER"
          
          dockerImage = docker.build registry_dev + ":$patch" , "."
-         docker.withRegistry( 'https://hub.docker.com', 'reg-logins' ) { 
+         docker.withRegistry( 'https://index.docker.io/v1/', 'reg-logins' ) { 
                       dockerImage.push(patch)
                  }
          }
