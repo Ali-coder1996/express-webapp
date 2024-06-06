@@ -14,7 +14,7 @@ pipeline {
     //     }
       stage ('docker') {
             steps {
-                container('vm') {
+                container('dockers') {
                     script {
                         sh "helm version"
                         sh "kubectl version"
@@ -25,7 +25,7 @@ pipeline {
     stage('Hello world') {
       agent {
         kubernetes {
-          inheritFrom 'vm'
+          inheritFrom 'dockers'
         }
       }
       steps {
