@@ -95,13 +95,13 @@ pipeline {
                 }
             }
         }
-        stage('docker') {
-            steps {
-                container('docker') {
-                    sh 'docker images'
-                }
-            }
-        }
+        // stage('docker') {
+        //     steps {
+        //         container('docker') {
+        //             sh 'docker images'
+        //         }
+        //     }
+        // }
     }
 }
 
