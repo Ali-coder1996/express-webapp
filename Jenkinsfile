@@ -69,25 +69,34 @@ pipeline {
       }
     }
     stages {
-        stage('Build') {
-            agent {
-                kubernetes {
-                  inheritFrom 'jenkins-slave'
-                }
-              }
-            steps {
-                container('helm') {
-                    sh 'helm version'
-                    sh 'kubectl version'
-                }
-            }
+      stage('Build/Push Image') {
+       steps{
+        container('docker') {
+        script {
+         def version = readFile('VERSION')
+         patch = version.trim()
+         patch = patch + ".$BUILD_NUMBER"
+         
+         dockerImage = docker.build registry_dev + ":$patch" , "."
+        //  docker.withRegistry( 'https://dxb.ocir.io', 'reg-logins' ) { 
+        //               dockerImage.push(patch)
+        //          }
+        //  }
         }
-        stage('docker') {
-            steps {
-                container('docker') {
-                    sh 'docker images'
-                }
-            }
-        }
+      }
+        // stage('Build') {
+        //     agent {
+        //         kubernetes {
+        //           inheritFrom 'jenkins-slave'
+        //         }
+        //       }
+        //     steps {
+        //         container('helm') {
+        //             sh 'helm version'
+        //             sh 'kubectl version'
+        //         }
+        //     }
+        // }
+       }
     }
 }
