@@ -71,6 +71,8 @@ pipeline {
 
     environment {
       registryCredential = 'reg-logins'
+      registry_dev = "alialhjouj/" + "$env.JOB_NAME"
+
     }
     stages {
 
@@ -104,7 +106,7 @@ pipeline {
          patch = version.trim()
          patch = patch + ".$BUILD_NUMBER"
          
-         dockerImage = docker.build "$env.JOB_NAME"+ ":$patch" , "."
+         dockerImage = docker.build registry_dev + ":$patch" , "."
          docker.withRegistry( 'https://hub.docker.com', 'reg-logins' ) { 
                       dockerImage.push(patch)
                  }
