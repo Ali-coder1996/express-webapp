@@ -75,8 +75,8 @@ pipeline {
     }
     stages {
       stage('Hello world') {
-        container('docker') {
         steps {
+          container('docker') {
             sh "echo $env.JOB_NAME"
         }
         }
@@ -110,4 +110,4 @@ pipeline {
         //         }
         //     }
         // }
-       }
+}
