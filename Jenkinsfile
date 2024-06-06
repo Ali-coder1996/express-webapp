@@ -42,7 +42,7 @@ pipeline {
                 container('ali') {
                     script {
                         sh "helm version"
-                        sh "kubectl images"
+                        sh "kubectl version"
                     }
                 }
             }
