@@ -49,7 +49,7 @@ pipeline {
       }
        }
 
-    stage('Hello world') {
+    stage('Deploy Chart') {
       agent {
         kubernetes {
           inheritFrom 'jenkins-slave'
