@@ -1,7 +1,7 @@
 pipeline {
   agent {
     kubernetes {
-          inheritFrom 'dockers'
+          inheritFrom 'terraform'
         }
   }
 
@@ -20,8 +20,9 @@ pipeline {
             steps {
                 container('jnlp') {
                     script {
-                        sh "helm version"
-                        sh "kubectl version"
+                        sh "terraform --version"
+                        // sh "helm version"
+                        // sh "kubectl version"
                     }
                 }
             }
@@ -29,12 +30,12 @@ pipeline {
     stage('Hello world') {
       agent {
         kubernetes {
-          inheritFrom 'dockers'
+          inheritFrom 'terraform'
         }
       }
       steps {
-          sh "helm version"
-          sh "kubectl version"
+          sh "terraform --version"
+          // sh "kubectl version"
       }
     }
   } 
