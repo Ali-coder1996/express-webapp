@@ -46,8 +46,8 @@ pipeline {
     agent {
       kubernetes {
         cloud 'kubernetes'
-        label 'jenkins-slave'
-        defaultContainer 'jnlp'
+        label 'jenkins'
+        defaultContainer 'docker'
         yaml '''
           apiVersion: v1
           kind: Pod
@@ -82,26 +82,26 @@ pipeline {
     //     }
     //   }
     // }
-        stage('Build') {
-            agent {
-                kubernetes {
-                  inheritFrom 'jenkins-slave'
-                }
-              }
-            steps {
-                container('helm') {
-                    sh 'helm version'
-                    sh 'kubectl version'
-                }
-            }
-        }
-        // stage('docker') {
+        // stage('Build') {
+        //     agent {
+        //         kubernetes {
+        //           inheritFrom 'jenkins-slave'
+        //         }
+        //       }
         //     steps {
-        //         container('docker') {
-        //             sh 'docker images'
+        //         container('helm') {
+        //             sh 'helm version'
+        //             sh 'kubectl version'
         //         }
         //     }
         // }
+        stage('docker') {
+            steps {
+                container('docker') {
+                    sh 'docker images'
+                }
+            }
+        }
     }
 }
 
