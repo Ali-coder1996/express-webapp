@@ -1,0 +1,22 @@
+replicaCount: 1
+
+image:
+  repository: express-webapp
+  pullPolicy: IfNotPresent
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""
+
+
+service:
+  type: ClusterIP
+  port: 3000
+

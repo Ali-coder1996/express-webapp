@@ -57,7 +57,7 @@ pipeline {
       }
       steps {
         container('helm') {
-          sh "kubectl get po -n jenkins"
+          sh "helm upgrade -i $SERVICE_NAME  helm-express-webapp -n jenkins --set image.tag=$patch --set image.repository=$registry_dev -f helm-express-webapp/values.yaml --atomic --debug --timeout=3m"
       }
     }
     }
