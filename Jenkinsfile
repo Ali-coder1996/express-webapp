@@ -2,7 +2,7 @@ pipeline {
   agent {
         kubernetes {
             label 'build-service'
-            defaultContainer 'jnlp'
+            defaultContainer 'ali'
             yaml """
               apiVersion: v1
               kind: Pod
@@ -11,7 +11,7 @@ pipeline {
                   job: build-service
               spec:
                 containers:
-                - name: jnlp
+                - name: ali
                   image: docker:24.0.7
                   command: ["cat"]
                   tty: true
@@ -29,7 +29,7 @@ pipeline {
   stages {
     stage ('docker') {
             steps {
-                container('jnlp') {
+                container('ali') {
                     script {
                         sh "docker build . -t test "
                         sh "docker images"
